@@ -70,13 +70,7 @@ sudo yay -Scc --noconfirm
 ######################################################################
 # see on kasutajaspetsiifiline seadistus
 # tuleb käivitada iga kasutaja all üks kord
-# seoses web-eid tulekuga ei ole vajalik
 modutil -dbdir sql:$HOME/.pki/nssdb -add opensc-pkcs11 -libfile onepin-opensc-pkcs11.so -mechanisms FRIENDLY -force 2>/dev/null
-
-# web-eid seadistamine
-# EST https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/
-# ENG https://www.id.ee/en/article/configuring-browsers-for-using-id-card/
-# RUS https://www.id.ee/ru/artikkel/nastrojka-veb-brauzerov-dlya-ispolzovaniya-id-karty/
 
 # kontroll:
 # modutil -dbdir sql:$HOME/.pki/nssdb -list
@@ -107,6 +101,19 @@ modutil -dbdir sql:$HOME/.pki/nssdb -add opensc-pkcs11 -libfile onepin-opensc-pk
 # otsida üles parameeter security.default_personal_cert
 # vaikimisi: Ask Every Time
 # automaatne režiim: Select Automatically
+
+# # # # # #
+# Web eID #
+# # # # # #
+# Ametlik uudis:
+# EST https://www.ria.ee/et/uudised/id-tarkvara-varske-versioon-sai-uuendusliku-web-eid-liidese.html
+# ENG https://www.ria.ee/en/news/latest-version-id-software-includes-innovative-web-eid-interface.html
+# RUS https://www.ria.ee/ru/novosti/poslednyaya-versiya-programmnogo-obespecheniya-dlya-id-karty-poluchila-innovacionnyy-veb.html
+# 
+# Web eID seadistamine
+# EST https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/
+# ENG https://www.id.ee/en/article/configuring-browsers-for-using-id-card/
+# RUS https://www.id.ee/ru/artikkel/nastrojka-veb-brauzerov-dlya-ispolzovaniya-id-karty/
 
 #########################################
 # PC/SC TEENUSE LUBAMINE JA KÄIVITAMINE #
