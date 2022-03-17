@@ -177,6 +177,7 @@ security.default_personal_cert
 Ask Every Time
 - automaatse režiimi sisselülitamiseks kirjutada selle asemele:
 Select Automatically
+- salvestada muudatus - vajutada Enter või rea lõpus vastav nupp
 
 Web eID lisateave ja laienduse testimine
 ----------------------------------------
