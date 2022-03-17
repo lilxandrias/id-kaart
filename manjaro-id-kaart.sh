@@ -54,8 +54,15 @@ for i in $(gpg --list-keys --with-colons --fingerprint | sed -n 's/^fpr:::::::::
 ##################################
 # paigaldame ID-kaarditarkvara AUR'ist, sudo pole yay puhul lubatud
 # siiski pacmani käivitumisel kasutatake sudo automaatselt
-# yay -S qdigidoc4 chrome-token-signing esteidpkcs11loader --noconfirm --cleanafter
+#
+# varasem paigaldus
+# yay -S qdigidoc4 chrome-token-signing esteidpkcs11loader --noconfirm --needed --cleanafter
+#
+# alates 15.03.2022 tulnud web-eid tugi
 yay -S qdigidoc4 web-eid chromium-extension-web-eid firefox-extension-web-eid esteidpkcs11loader --noconfirm --needed --cleanafter
+#
+# kui siiski internetipangas vms ei toimi ID-kaart kuna pole jõutud Web eID'd kasutusele võtta, siis paigaldada ka see pakett
+# yay -S chrome-token-signing --noconfirm --needed --cleanafter
 
 # paigaldame ametlikust varamust ID-kaardilugejate tarkvara
 # juhul kui seda ei olnud eelnevalt paigaldatud
