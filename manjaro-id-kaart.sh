@@ -132,7 +132,7 @@ sudo systemctl restart pcscd.socket
 cat << EOF
 
 NB! KASUTAJATEL TULEB ISE PAIGALDADA Web eID VEEBILEHITSEJATE LAIENDUSED!
-
+-------------------------------------------------------------------------
 Ametlik uudis Web eID kasutuselevõtu kohta alates 15.märtsist 2022:
 https://www.ria.ee/et/uudised/id-tarkvara-varske-versioon-sai-uuendusliku-web-eid-liidese.html
 
@@ -148,32 +148,38 @@ käesoleva skripti kommentaaridest. Kui tekib konflikt, siis tasub alles jätta 
 ja vanema teenuse puhul näiteks Smart-ID või muud nutiseadme-põhist
 lahendust kasutada kuniks teenusepakkuja ka Web eID peale ära on uuendanud.
 
-CHROMIUM
+CHROMIUMi Web eID laiendus
+--------------------------
 ... ja sellepõhised veebilehitsejad (Google Chrome, Brave, jt)
 https://chrome.google.com/webstore/detail/web-eid/ncibgoaomkmdpilpocfeponihegamlic
 
-FIREFOX
+FIREFOXi Web eID laiendus
+-------------------------
 https://addons.mozilla.org/en-US/firefox/addon/web-eid-webextension/
 
+Firefoxi turvamooduli lisamine käsitsi
+--------------------------------------
 Firefoxis võib olla vajalik lisada käsitsi turvamoodul,
-kui seda mingil põhjusel ei ole tekkinud.
-Turvaseadmed -> Laadi
-Nimi: OpenSC smartcard
-asukoht: /usr/lib/onepin-opensc-pkcs11.so
+kui seda mingil põhjusel ei ole tekkinud:
+- about:preferences#privacy (sisestada aadressireale + vajutada Enter)
+- Turvaseadmed -> Laadi
+- Nimi: OpenSC smartcard
+- asukoht: /usr/lib/onepin-opensc-pkcs11.so
 
-Lisaks on kasulik automaatne sertifikaadi valimine Firefoxis.
-
-Aadressireale kirjutada
+Automaatne sertifikaadi valimine Firefoxis
+------------------------------------------
+- aadressireale kirjutada
 about:config
 ...ja vajutada Enter ning olla nõus hoiatusega
-
-otsida üles parameeter:
+- otsida üles parameeter:
 security.default_personal_cert
-
-vaikimisi on seal väärtus:
+- vaikimisi on seal väärtus:
 Ask Every Time
-
-automaatse režiimi sisselülitamiseks kirjutada selle asemele:
+- automaatse režiimi sisselülitamiseks kirjutada selle asemele:
 Select Automatically
+
+Web eID lisateave ja laienduse testimine
+----------------------------------------
+https://web-eid.eu/
 
 EOF
