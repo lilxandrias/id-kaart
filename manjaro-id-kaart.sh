@@ -183,4 +183,6 @@ Web eID lisateave ja laienduse testimine
 ----------------------------------------
 https://web-eid.eu/
 
+Seal võimalik testida nii isikutuvastust kui digiallkirjastamist.
+
 EOF
