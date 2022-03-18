@@ -8,7 +8,7 @@
 # Testis ja nõu andis: Arvo Mägi
 # Lisateave https://viki.pingviin.org/ID-kaart_Manjaro_Linuxis
 
-# Allolev skript võiks toimida mitte ainult Manjaro Linuxis, vaid ka Arch Linux jt Arch Linuxi põhjal tehtud distrod
+# Allolev skript võiks toimida mitte ainult Manjaro Linuxis, vaid ka Arch Linuxis jt selle põhjal tehtud distrotes
 # https://distrowatch.com/search.php?ostype=Linux&category=All&origin=All&basedon=Arch&notbasedon=None&desktop=All&architecture=All&package=All&rolling=All&isosize=All&netinstall=All&language=All&defaultinit=All&status=Active#simple
 
 # Käesolev skript on testitud:
