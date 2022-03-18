@@ -1,13 +1,35 @@
 #!/bin/sh
 
-# skript käivitada
-# sh skript.sh
-# osa käske peavad minema tööle tavakasutajana
+# Skript algselt kirjutatud Manjaro Linuxile.
 
+# ID-kaarditarkvara automaatse paigaldamise skript
+# Arch Linuxile ja sellepõhistele distrotele
+# Skripti koostas: Edmund Laugasson
+# Testis ja nõu andis: Arvo Mägi
+# Lisateave https://viki.pingviin.org/ID-kaart_Manjaro_Linuxis
+
+# Allolev skript võiks toimida mitte ainult Manjaro Linuxis, vaid ka Arch Linux jt Arch Linuxi põhjal tehtud distrod - https://distrowatch.com/search.php?ostype=Linux&category=All&origin=All&basedon=Arch&notbasedon=None&desktop=All&architecture=All&package=All&rolling=All&isosize=All&netinstall=All&language=All&defaultinit=All&status=Active#simple
+
+# Käesolev skript on testitud:
+# - Manjaro Linux https://manjaro.org/
+# - EndeavourOS https://endeavouros.com/
+
+#######################
+# Skripti käivitamine #
+#######################
+# sh skript.sh
+# osa käske (nt yay) peavad minema tööle tavakasutajana
+
+##################
+# Peegelserverid #
+##################
 # leiame kiiremad peegelserverid
 # see võib teinekord põhjustada siiski segadust, lubada kui muidu ei toimi
 # sudo pacman-mirrors -f 5
 
+#######################
+# Süsteemi uuendamine #
+#######################
 # uuendame tarkvarapakettide andmebaasid ja kogu süsteemi
 # peale uuendamist tühjendame pacmani vahemälu
 sudo pacman -Syyu --noconfirm
@@ -34,10 +56,11 @@ keyserver=keyserver.ubuntu.com
 # GPG-VÕTMETE IMPORTIMINE #
 ###########################
 # Puuduvate GPG-võtmete importimine eelnevalt
+
 # xml-security-c
-# võtame GPG-võtme sõrmejälje otse AURi serverist
+# võtame GPG-võtme otse AURi serverist
 gpg --keyserver $keyserver --recv-keys $(curl -fsSL "https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=xml-security-c" | grep validpgpkeys | cut -d";" -f2 | rev | cut -d"&" -f2 | rev)
-#
+
 # libdigidocpp, qdigidoc4, esteidpkcs11loader, chrome-token-signing
 gpg --keyserver $keyserver --recv-keys $(curl -fsSL "https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=libdigidocpp" | grep "Raul Metsma" | cut -d";" -f2 | rev | cut -d"&" -f2 | rev)
 
@@ -46,6 +69,9 @@ gpg --keyserver $keyserver --recv-keys $(curl -fsSL "https://aur.archlinux.org/c
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=web-eid
 wget -q -O- https://github.com/mrts.gpg|gpg --import -
 
+##########################
+# GPG-VÕTMETE USALDAMINE #
+##########################
 # automatiseeritult kõikide imporditud GPG-võtmete täielik usaldamine
 for i in $(gpg --list-keys --with-colons --fingerprint | sed -n 's/^fpr:::::::::\([[:alnum:]]\+\):/\1/p') ; do printf "trust\n5\ny\nquit" | gpg -q --no-tty --command-fd 0 --status-fd 2 --expert --edit-key $i 2>/dev/null 1>/dev/null ; done
 
@@ -54,21 +80,25 @@ for i in $(gpg --list-keys --with-colons --fingerprint | sed -n 's/^fpr:::::::::
 ##################################
 # paigaldame ID-kaarditarkvara AUR'ist, sudo pole yay puhul lubatud
 # siiski pacmani käivitumisel kasutatake sudo automaatselt
-#
+
 # varasem paigaldus
 # yay -S qdigidoc4 chrome-token-signing esteidpkcs11loader --noconfirm --needed --cleanafter
-#
-# alates 15.03.2022 tulnud web-eid tugi
+
+# alates 15.03.2022 tulnud Web eID tugi
 yay -S qdigidoc4 web-eid esteidpkcs11loader --noconfirm --needed --cleanafter
-#
+
 # Kui siiski internetipangas või mujal ei toimi ID-kaart, kuna pole jõutud Web eID'd kasutusele võtta, siis paigaldada ka see pakett
 # yay -Syu chrome-token-signing --noconfirm --needed --cleanafter && yay -Scc --noconfirm
 
 # Olgu mainitud, et chromium-extension-web-eid firefox-extension-web-eid paketid on vaid testimiseks AURis olemas.
 # https://aur.archlinux.org/packages/chromium-extension-web-eid
 # https://aur.archlinux.org/packages/firefox-extension-web-eid
+#
 # Kui siiski soovitakse testimise, arenduse eesmärgil paigaldada, siis:
-# yay -S chromium-extension-web-eid firefox-extension-web-eid --noconfirm --needed --cleanafter
+# yay -S chromium-extension-web-eid firefox-extension-web-eid --noconfirm --needed --cleanafter && yay -Scc --noconfirm
+#
+# Eemaldamiseks
+# yay -Rn chromium-extension-web-eid firefox-extension-web-eid
 
 # paigaldame ametlikust varamust ID-kaardilugejate tarkvara
 # juhul kui seda ei olnud eelnevalt paigaldatud
