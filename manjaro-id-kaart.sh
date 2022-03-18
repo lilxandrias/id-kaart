@@ -66,7 +66,7 @@ gpg --keyserver $keyserver --recv-keys $(curl -fsSL "https://aur.archlinux.org/c
 gpg --keyserver $keyserver --recv-keys $(curl -fsSL "https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=libdigidocpp" | grep "Raul Metsma" | cut -d";" -f2 | rev | cut -d"&" -f2 | rev)
 
 # web-eid, chromium-extension-web-eid, firefox-extension-web-eid
-# Mart Sõmermaa
+# Mart Sõmermaa https://github.com/mrts
 # https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=web-eid
 wget -q -O- https://github.com/mrts.gpg|gpg --import -
 
