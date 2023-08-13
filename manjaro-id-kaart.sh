@@ -43,6 +43,7 @@ sudo pacman -Scc --noconfirm
 # juhul kui neid ei olnud eelnevalt paigaldatud
 sudo pacman -S yay --needed --noconfirm
 sudo pacman -S base-devel --needed --noconfirm
+# vajadusel asendada yay sobiva AURi rakendusega, nt Garuda Linuxis on paru vaikimisi paigaldatud
 
 ###############
 # VÕTMESERVER #
@@ -79,27 +80,18 @@ for i in $(gpg --list-keys --with-colons --fingerprint | sed -n 's/^fpr:::::::::
 ##################################
 # ID-KAARDITARKVARA PAIGALDAMINE #
 ##################################
-# paigaldame ID-kaarditarkvara AUR'ist, sudo pole yay puhul lubatud
+# paigaldame ID-kaarditarkvara AUR'ist, sudo pole yay jt AURi rakenduste puhul lubatud
 # siiski pacmani käivitumisel kasutatake sudo automaatselt
 
 # varasem paigaldus
 # yay -S qdigidoc4 chrome-token-signing esteidpkcs11loader --noconfirm --needed --cleanafter
 
-# alates 15.03.2022 tulnud Web eID tugi
-yay -S qdigidoc4 web-eid esteidpkcs11loader --noconfirm --needed --cleanafter
+# alates 15.03.2022 tulnud Web eID tugi, uuendatud pakettide nimed
+yay -S qdigidoc4 web-eid-native web-eid-chrome web-eid-firefox esteidpkcs11loader --noconfirm --needed --cleanafter
+# vajadusel asendada yay sobiva AURi rakendusega, nt Garuda Linuxis on paru vaikimisi paigaldatud
 
 # Kui siiski internetipangas või mujal ei toimi ID-kaart, kuna pole jõutud Web eID'd kasutusele võtta, siis paigaldada ka see pakett
 # yay -Syu chrome-token-signing --noconfirm --needed --cleanafter && yay -Scc --noconfirm
-
-# Olgu mainitud, et chromium-extension-web-eid firefox-extension-web-eid paketid on vaid testimiseks AURis olemas.
-# https://aur.archlinux.org/packages/chromium-extension-web-eid
-# https://aur.archlinux.org/packages/firefox-extension-web-eid
-#
-# Kui siiski soovitakse testimise, arenduse eesmärgil paigaldada, siis:
-# yay -S chromium-extension-web-eid firefox-extension-web-eid --noconfirm --needed --cleanafter && yay -Scc --noconfirm
-#
-# Eemaldamiseks
-# yay -Rn chromium-extension-web-eid firefox-extension-web-eid
 
 # paigaldame ametlikust varamust ID-kaardilugejate tarkvara
 # juhul kui seda ei olnud eelnevalt paigaldatud
@@ -108,7 +100,7 @@ sudo pacman -S ccid --needed --noconfirm
 #puhastame paketihaldurite vahemälu paigaldatud tarkvarast
 sudo pacman -Scc --noconfirm
 yay -Scc --noconfirm
-
+# vajadusel asendada yay sobiva AURi rakendusega, nt Garuda Linuxis on paru vaikimisi paigaldatud
 ######################################################################
 # CHROMIUMI JA SELLEPÕHISTE VEEBILEHITSEJATE JAOKS VAJALIK SEADISTUS #
 ######################################################################
@@ -142,9 +134,9 @@ sudo systemctl restart pcscd.socket
 # Web eID #
 # # # # # #
 # Ametlik uudis:
-# EST https://www.ria.ee/et/uudised/id-tarkvara-varske-versioon-sai-uuendusliku-web-eid-liidese.html
-# ENG https://www.ria.ee/en/news/latest-version-id-software-includes-innovative-web-eid-interface.html
-# RUS https://www.ria.ee/ru/novosti/poslednyaya-versiya-programmnogo-obespecheniya-dlya-id-karty-poluchila-innovacionnyy-veb.html
+# EST https://www.id.ee/artikkel/id-tarkvara-varske-versioon-sai-uuendusliku-web-eid-liidese/
+# ENG https://www.id.ee/en/article/the-latest-version-of-the-id-software-includes-an-innovative-web-eid-interface/
+# RUS https://www.id.ee/ru/artikkel/poslednyaya-versiya-programmnogo-obespecheniya-dlya-id-karty-poluchila-innovaczionnyj-veb-interfejs-web-eid/
 #
 # Web eID seadistamine
 # EST https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/
@@ -161,11 +153,6 @@ sudo systemctl restart pcscd.socket
 # https://chromeenterprise.google/policies/#AutoSelectCertificateForUrls
 
 cat << EOF
-
-NB! KASUTAJATEL TULEB ISE PAIGALDADA Web eID VEEBILEHITSEJATE LAIENDUSED!
--------------------------------------------------------------------------
-Ametlik uudis Web eID kasutuselevõtu kohta alates 15.märtsist 2022:
-https://www.ria.ee/et/uudised/id-tarkvara-varske-versioon-sai-uuendusliku-web-eid-liidese.html
 
 Vajalik võib olla ka käsitsi laienduse lubamine veebilehitsejas!
 https://www.id.ee/artikkel/veebibrauserite-seadistamine-id-kaardi-kasutamiseks/
